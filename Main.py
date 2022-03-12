@@ -42,6 +42,7 @@ def menu():
             cant_pizzas = int(input("CANTIDAD DE PIZZAS: "))
             cant_ingred = int(input("¿CUANTOS INGREDIENTES DESEA AGREGAR A SUS PIZZAS?: "))
             tiempo_total = 0
+            tiempo_total1 =0
             print("INGREDIENTES: ")
             lista_ingredientes = Estructura_ingredientes.ListaDoble()
             contador_ing = 0
@@ -74,15 +75,49 @@ def menu():
                     tiempo_ing = 2
                 ingred_nuevo = Ingrediente(nombre_ing,tiempo_ing)
                 lista_ingredientes.añadirNodo(ingred_nuevo)
-                tiempo_total += tiempo_ing
-            
+                print(tiempo_ing)
+                tiempo_total1 += tiempo_ing
+            tiempo_total = tiempo_total1*cant_pizzas
+
             orden_nueva = Orden(id_orden, nombre_cliente, dpi_cliente, cant_pizzas,lista_ingredientes,tiempo_total)
             lista_ordenes.añadirNodo(orden_nueva)
             print("ORDEN AGREGADA CON EXITO, DEBE ESPERAR: "+str(tiempo_total)+" mins. ")
             print("")
+            print("SE LE MUESTRA EL NOMBRE DEL CLIENTE EN LA COLA")
+            
+            mi_archivo= open('orden_agregada.dot','w')
+            mi_archivo.write("graph L{")
+            mi_archivo.write("node[shape = box fillcolor = \"#FFEDBB\" style  = filled]")
+            mi_archivo.write("subgraph cluster_p{")
+            mi_archivo.write("label= \"COLA DE ORDENES\"")
+            mi_archivo.write("bgcolor = \"#398D9C\"")
+            mi_archivo.write("edge [dir = \"both\"]")
+            celda="orden"
+            contador = 1 
+            mensaje =''
+            nodoTemporal = Estructura_cola.Nodo("")
+
+            nodoTemporal = lista_ordenes.head
+            contador = 1
+            while nodoTemporal != None:
+            
+                mensaje =str(celda+str(contador))
+                    
+                mi_archivo.write(mensaje+"[label= \""+str(nodoTemporal.objeto_orden.nombre_cliente)+"\", fillcolor =\"cyan\", group = 2 ];")
+                contador += 1 
+                nodoTemporal = nodoTemporal.siguiente
+          
+            mi_archivo.write("}")
+            mi_archivo.write("}")
+
+            mi_archivo.close()
+
+            system('dot -Tpng orden_agregada.dot -o orden_agregada.png')
+            system('cd./orden_agregada.png')
+            startfile('orden_agregada.png')
                 
         if (opcion == 2):
-            print("MOSTRAR ORDENES: ")
+            print("MOSTRAR ORDENES: SE MUESTRA EL NOMBRE DEL CLIENTE")
             lista_ordenes.imprimirLista()
 
 
@@ -105,30 +140,10 @@ def menu():
             
                 mensaje =str(celda+str(contador))
                     
-                mi_archivo.write(mensaje+"[label= \""+str(nodoTemporal.objeto_orden.id_orden)+"\", fillcolor =\"cyan\", group = 2 ];")
+                mi_archivo.write(mensaje+"[label= \""+str(nodoTemporal.objeto_orden.nombre_cliente)+"\", fillcolor =\"cyan\", group = 2 ];")
                 contador += 1 
                 nodoTemporal = nodoTemporal.siguiente
-            '''
-            contador2 = 1
-            for j in range(contador-1):
-                mensaje =str(celda+str(contador2))
-                sig_ = str(celda+str(contador2+1))
-                mi_archivo.write(mensaje+"->"+sig_+";")
-                contador2 +=1
-            
-            contador_same = 1
-            mi_archivo.write("{rank = same;")
-                
-            for j in range(contador-1):
-                mensaje =str(celda+str(contador_same))
-                mi_archivo.write(mensaje+";")
-                contador_same+=1
-
-                mi_archivo.write("}")
-
-            '''
-
-            
+          
             mi_archivo.write("}")
             mi_archivo.write("}")
 

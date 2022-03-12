@@ -1,1 +1,0 @@
-graph L{node[shape = box fillcolor = "#FFEDBB" style  = filled]subgraph cluster_p{label= "COLA DE ORDENES"bgcolor = "#398D9C"edge [dir = "both"]orden1[label= "2", fillcolor ="cyan", group = 2 ];orden2[label= "4", fillcolor ="cyan", group = 2 ];}}
