@@ -1,3 +1,11 @@
+YENIFER ESTER YOC LARIOS 
+201952336
+
+PRACTICA 1 IPC2, 
+
+Agregue el enunciado de la practica, hoja de calificación 
+Espero les sirva :)
+
 En un restaurante de la ciudad, el producto más popular desde el inicio de la
 pandemia han sido las pizzas a domicilio. Los dueños del restaurante solían llevar
 las órdenes a mano, pero debido al crecimiento de la demanda han optado por
